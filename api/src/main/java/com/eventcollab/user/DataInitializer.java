@@ -1,4 +1,4 @@
-package com.event.user;
+package com.eventcollab.user;
 
 import java.time.LocalDateTime;
 

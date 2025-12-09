@@ -1,4 +1,4 @@
-package com.event.security;
+package com.eventcollab.security;
 
 import java.security.Key;
 import java.util.Date;

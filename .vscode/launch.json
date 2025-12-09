@@ -8,6 +8,17 @@
       "mainClass": "com.event.EventPlatformApplication",
       "projectName": "api",
       "args": "",
+      "envFile": "${workspaceFolder}/.env",
+      "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=51138 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=api"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-EventPlatformApplication<api>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.eventcollab.EventPlatformApplication",
+      "projectName": "api",
+      "args": "",
       "envFile": "${workspaceFolder}/.env"
     }
   ]

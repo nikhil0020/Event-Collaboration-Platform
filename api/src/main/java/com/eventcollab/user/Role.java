@@ -1,4 +1,4 @@
-package com.event.user;
+package com.eventcollab.user;
 
 public enum Role {
   ROLE_USER,

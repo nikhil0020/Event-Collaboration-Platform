@@ -1,12 +1,12 @@
-package com.event.security;
+package com.eventcollab.security;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.event.user.User;
-import com.event.user.UserRepository;
+import com.eventcollab.user.User;
+import com.eventcollab.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 

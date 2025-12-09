@@ -1,4 +1,4 @@
-package com.event.security;
+package com.eventcollab.security;
 
 import java.util.Collection;
 import java.util.List;
@@ -8,8 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.event.user.Role;
-import com.event.user.User;
+import com.eventcollab.user.Role;
+import com.eventcollab.user.User;
 
 public class UserPrincipal implements UserDetails {
 
