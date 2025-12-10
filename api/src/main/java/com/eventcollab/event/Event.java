@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.eventcollab.participant.EventParticipant;
 import com.eventcollab.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -21,6 +22,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -57,8 +59,13 @@ public class Event {
   @Builder.Default
   private EventStatus status = EventStatus.DRAFT;
 
+  @Column(name = "created_by_id")
+  @Setter(AccessLevel.NONE)
+  private Long createdById;
+
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "created_by_id", nullable = false)
+  @JoinColumn(name = "created_by_id", insertable = false, updatable = false)
+  @JsonIgnore
   private User createdBy;
 
   private LocalDateTime createdAt;
@@ -70,6 +77,11 @@ public class Event {
   )
   @Builder.Default
   private List<EventParticipant> participants = new ArrayList<>();
+
+  public void setCreatedBy(User createdBy) {
+    this.createdById = createdBy.getId();
+    this.createdBy = createdBy;
+  }
   
   @PrePersist
   public void prePersist() {

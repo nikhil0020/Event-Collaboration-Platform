@@ -5,16 +5,19 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.eventcollab.event.dto.EventRequest;
+import com.eventcollab.event.dto.EventResponse;
+
 public interface EventService {
-  Event createEvent(Event event);
+  EventResponse createEvent(EventRequest event);
 
-  Event updateEvent(Long eventId, Event updatedEvent, Long currentUserId);
+  EventResponse updateEvent(Long eventId, EventRequest updatedEvent);
 
-  void deleteEvent(Long eventId, Long currentUserId);
+  void deleteEvent(Long eventId);
 
-  Optional<Event> getById(Long id);
+  Optional<EventResponse> getById(Long id);
 
-  Page<Event> listPublishedEvents(Pageable pageable);
+  Page<EventResponse> listPublishedEvents(Pageable pageable);
 
-  Event publishEvent(Long eventId, Long currentUserId);
+  EventResponse publishEvent(Long eventId);
 }
