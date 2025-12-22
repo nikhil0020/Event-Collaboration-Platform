@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.eventcollab.event.dto.EventRequest;
 import com.eventcollab.event.dto.EventResponse;
+import com.eventcollab.global.dto.PageResponse;
 import com.eventcollab.global.exception.NotAuthorizedToAccessResourceException;
 import com.eventcollab.participant.EventParticipant;
 import com.eventcollab.participant.EventParticipantRepository;
@@ -45,7 +46,7 @@ public class EventServiceImpl implements EventService{
                     .createdBy(user)
                     .title(eventRequest.getTitle())
                     .description(eventRequest.getDescription())
-                    .starTime(eventRequest.getStartTime())
+                    .startTime(eventRequest.getStartTime())
                     .endTime(eventRequest.getEndTime())
                     .location(eventRequest.getLocation())
                     .status(EventStatus.DRAFT)
@@ -101,8 +102,9 @@ public class EventServiceImpl implements EventService{
   }
 
   @Override
-  public Page<EventResponse> listPublishedEvents(Pageable pageable) {
-    return eventRepository.findByStatus(EventStatus.PUBLISHED, pageable);
+  public PageResponse<EventResponse> listPublishedEvents(Pageable pageable) {
+    Page<EventResponse> events = eventRepository.findByStatus(EventStatus.PUBLISHED, pageable);
+    return getPageResponse(events);
   }
 
   @Override
@@ -120,5 +122,30 @@ public class EventServiceImpl implements EventService{
 
     Event updatedEvent = eventRepository.save(event);
     return eventMapper.toEventResponse(updatedEvent);
+  }
+
+  @Override
+  public PageResponse<EventResponse> searchPublisedEvents(String search, Pageable pageable) {
+
+    Page<EventResponse> events;
+
+    if (search == null || search.isBlank()) {
+      events = eventRepository.findByStatus(EventStatus.PUBLISHED, pageable);
+    } else {
+      events = eventRepository.findByStatusAndTitleContainingIgnoreCase(EventStatus.PUBLISHED, search, pageable);
+    }
+
+    return getPageResponse(events);
+  }
+
+  public <T> PageResponse<T> getPageResponse(Page<T> pages) {
+    return new PageResponse<>(
+      pages.getContent(),
+      pages.getNumber(),
+      pages.getSize(),
+      pages.getTotalElements(),
+      pages.getTotalPages(),
+      pages.isLast()
+    );
   }
 }

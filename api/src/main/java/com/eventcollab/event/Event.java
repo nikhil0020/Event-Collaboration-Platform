@@ -50,7 +50,7 @@ public class Event {
 
   private String location;
 
-  private LocalDateTime starTime;
+  private LocalDateTime startTime;
 
   private LocalDateTime endTime;
 

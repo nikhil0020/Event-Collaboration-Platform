@@ -7,7 +7,7 @@ public record EventResponse(
   String title,
   String description,
   String location,
-  LocalDateTime starTime,
+  LocalDateTime startTime,
   LocalDateTime endTime
 ) {
   
